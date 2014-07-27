@@ -35,9 +35,9 @@
      This could be done nicely with rbd map locking. The xen hotplug scripts would need "help" to correctly handle it. Right now they only know how to look at single-dom0 level and don't do it for external block scripts. (actually, seems file: type only?)
 
 
-Authors:
+## Authors:
 
- Thomas Zelch
- Florian Heigl
+* Thomas Zelch
+* Florian Heigl
 
 
