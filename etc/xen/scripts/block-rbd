@@ -1,9 +1,9 @@
-#!/bin/bash -e
+#!/bin/bash -eu
 #
 # RBD Xen block device hotplug script
 #
-# Author Florian Heigl <florian.heigl@gmail.com>
-# Author Thomas Zelch  <thomaszelch@gmail.com>
+# Author Florian Heigl <florian.heigl AT gmail>
+# Author Thomas Zelch  <thomaszelch AT gmail>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU Lesser General Public License as published
@@ -48,19 +48,28 @@
 # http://cephnotes.ksperis.com/blog/2014/01/09/map-rbd-kernel-without-install-ceph-common
 
 
-# blubber debug
-set -x
-LOG=/tmp/block-rbd.log
-echo 2>&1
-exec 1>>$LOG
-echo $@
+if [[ $DEBUG ]]; then
+    set -x
+    LOG=/tmp/block-rbd.log
+    echo 2>&1
+    exec 1>>$LOG
+    echo $@
+fi
 
+
+# hotplug has unhandled variables
+# allow them while sourcing the other scripts
 dir=$(dirname "$0")
+set +u
 . "$dir/block-common.sh"
+set -u
 
-echo 2>&1
-exec 1>>$LOG
-echo $@
+if [[ $DEBUG ]]; then
+    echo 2>&1
+    exec 1>>$LOG
+    echo $@
+fi
+
 
 check_tools()
 {
@@ -73,13 +82,11 @@ check_tools()
     if ! lsmod | grep rbd >/dev/null ; then
         fatal "Unable to access RBD kernel module"
     fi
-    
 }
 
 
 parse_target()
 {
-
      pool=`echo $target | cut -f1 -d\:`
     image=`echo $target | cut -f2 -d\:`
     
@@ -89,7 +96,6 @@ parse_target()
 
 add()
 {
-    
     if rbd --pool $pool list | grep $image >/dev/null ; then
        do_or_die rbd --pool $pool --image $image map
        
@@ -100,14 +106,12 @@ add()
     if ! [ -b /dev/rbd/$pool/$image ]; then
         fatal "Missing RBD device file /dev/rbd/$pool/$image"
     fi
-
 }
 
 
 # need to ensure this is the *last* VM accessing the rbd image?
 remove()
 {
-
     if [ -b /dev/rbd/$pool/$image ]; then
        do_or_die rbd unmap /dev/rbd/$pool/$image
     else
