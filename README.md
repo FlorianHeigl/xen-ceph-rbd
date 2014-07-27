@@ -51,7 +51,7 @@ Instead we went for what __will immediately work for everyone__:
      This could be used to implement VDI autocloning using Xen. It would be implemented as an optional feature triggered via extra flags.
 
 *  Implement proper support for __w,r,r!,w!__ by asking Ceph about single-/multiattachment (so, cluster-wide locking)
-     This could be done nicely with rbd map locking. The xen hotplug scripts would need "help" to correctly handle it. Right now they only know how to look at single-dom0 level and don't do it for external block scripts. (actually, seems file: type only?)
+     This could be done nicely with __rbd map__, which has locking support. The xen hotplug scripts would need "help" to correctly handle it. Right now they only know how to look at single-dom0 level and don't do it for external block scripts. (actually, seems file: type only?)
 
 
 ## Authors:
