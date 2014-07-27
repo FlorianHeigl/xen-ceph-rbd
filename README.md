@@ -4,8 +4,10 @@ The goal of this project is to work towards a widely available, simple and fast 
 Ceph in Xen.
 The most direct way towards this is via a custom block script in /etc/xen/scripts.
 The best-performing way would be a LIBRADOS based blockback driver, which is more complex to tackle.
-Starting there would result in yet another non-upstreamed dead Xen addon. 
-So this isn't a goal at the moment, instead we went for what will immediately work for everyone:
+Starting there would result in yet another powerful but non-upstreamed dead Xen addon. 
+
+
+Instead we went for what __will immediately work for everyone__:
 
 
 1. RDB Image 
