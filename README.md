@@ -22,9 +22,10 @@ Instead we went for what __will immediately work for everyone__:
 
  Mapping of a RBD image as specified in the domU config file. Tested to be bootable etc.
 
-## disk specification:
+## Config:
  (unverified, wasn't tested on my dom0)
-`diskt = [ 'script=block-rbd,dev=poolname:image_name' ]`
+
+`disk = [ 'script=block-rbd,dev=poolname:image_name,target=xvda' ]`
 
 ## What's not working:
 
