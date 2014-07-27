@@ -54,6 +54,12 @@ Instead we went for what __will immediately work for everyone__:
      This could be done nicely with __rbd map__, which has locking support. The xen hotplug scripts would need "help" to correctly handle it. Right now they only know how to look at single-dom0 level and don't do it for external block scripts. (actually, seems file: type only?)
 
 
+## Wishlist, but would need contributors
+
+* Librados blockback (would work best, maybe fastest, storage domU support)
+* qdisk Librados (has better SCSI emulation)
+
+
 ## Authors:
 
 * Thomas Zelch
