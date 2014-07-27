@@ -1,12 +1,28 @@
 # Xen Ceph Support
 
+The goal of this project is to work towards a widely available, simple and fast integration of 
+Ceph in Xen.
+The most direct way towards this is via a custom block script in /etc/xen/scripts.
+The best-performing way would be a LIBRADOS based blockback driver, which is more complex to tackle.
+Starting there would result in yet another non-upstreamed dead Xen addon. 
+So this isn't a goal at the moment, instead we went for what will immediately work for everyone:
+
+
+1. RDB Image 
+2. block-rbd script 
+3. disk specification 
+
+=> __domU running natively on Ceph__
+
+
+
 ## What's working:
 
  Mapping of a RBD image as specified in the domU config file. Tested to be bootable etc.
 
 ## disk specification:
  (unverified, wasn't tested on my dom0)
- script=block-rbd,dev=poolname:image_name
+`diskt = [ 'script=block-rbd,dev=poolname:image_name' ]`
 
 ## What's not working:
 
