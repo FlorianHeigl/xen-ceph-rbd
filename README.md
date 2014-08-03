@@ -53,6 +53,9 @@ PV-Grub can only boot "legacy Grub". On distros using Grub2 (Wheezy, RHEL7) you 
   http://thr3ads.net/xen-devel/2013/01/2281686-pygrub-hvm-boot-with-alternate-script-for-block-devices 
   LibXL should attach RBD device and pass it over correctly as "write_dev" stores it...
   (in xenstore we should params = poolname:image and image as passed to pygrub should be /dev/rbd/pool/image)
+  Right now it looks like PyGrub has never worked with external block device scripts. Who knows. This sucks because PV-Grub has a lot of other limitations
+
+* Attaching multiple devices - Unexpected, but there's a bug when specifying multiple disks
 
 
 ## What's planned:
