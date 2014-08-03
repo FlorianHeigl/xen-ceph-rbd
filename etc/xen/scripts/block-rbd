@@ -48,27 +48,12 @@
 # http://cephnotes.ksperis.com/blog/2014/01/09/map-rbd-kernel-without-install-ceph-common
 
 
-if [[ $DEBUG ]]; then
-    set -x
-    LOG=/tmp/block-rbd.log
-    echo 2>&1
-    exec 1>>$LOG
-    echo $@
-fi
-
-
 # hotplug has unhandled variables
 # allow them while sourcing the other scripts
 dir=$(dirname "$0")
 set +u
 . "$dir/block-common.sh"
 set -u
-
-if [[ $DEBUG ]]; then
-    echo 2>&1
-    exec 1>>$LOG
-    echo $@
-fi
 
 
 check_tools()

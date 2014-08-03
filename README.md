@@ -5,6 +5,7 @@ Ceph in Xen.
 The most direct way towards this is via a custom block script in /etc/xen/scripts.
 The best-performing way would be a LIBRADOS based blockback driver, which is more complex to tackle.
 Starting there would result in yet another powerful but non-upstreamed dead Xen addon. 
+Instead we go for the simplest option first and will use the time gained to press for upstreaming.
 
 
 Instead we went for what __will immediately work for everyone__:
@@ -23,9 +24,14 @@ Instead we went for what __will immediately work for everyone__:
  Mapping of a RBD image as specified in the domU config file. Tested to be bootable etc.
 
 ## Config:
- (unverified, wasn't tested on my dom0)
 
-`disk = [ 'script=block-rbd,dev=poolname:image_name,target=xvda' ]`
+Syntax example:
+
+`disk = [ 'script=block-rbd,vdev=xvdN,target=poolname:image_name' ]`
+
+To define __xvda__ as im __ceph_test__ in pool __rbd__ :
+
+`disk = [ 'script=block-rbd,vdev=xvda,target=rbd:ceph-test' ]`
 
 ## What's not working:
 
@@ -60,9 +66,17 @@ Instead we went for what __will immediately work for everyone__:
 * qdisk Librados (has better SCSI emulation)
 
 
+## Other solutions
+
+### blktap / RBD (not very active):
+ info: http://thr3ads.net/xen-devel/2013/04/2289675-Xen-blktap-driver-for-Ceph-RBD-Anybody-wants-to-test-p
+ source: https://github.com/smunaut/blktap/tree/rbd
+
+
 ## Authors:
 
 * Thomas Zelch
 * Florian Heigl
+
 
 
