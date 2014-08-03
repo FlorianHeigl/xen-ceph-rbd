@@ -33,14 +33,22 @@ To define __xvda__ as im __ceph_test__ in pool __rbd__ :
 
 `disk = [ 'script=block-rbd,vdev=xvda,target=rbd:ceph-test' ]`
 
+
+## PV-Grub config:
+
+### Syntax example for grub0.97:
+
+    kernel = "/usr/lib/xen/boot/pv-grub-x86_64.gz"
+    extra  = "(hd0,0)/boot/grub/menu.lst"
+
+### Warning: 
+
+PV-Grub can only boot "legacy Grub". On distros using Grub2 (Wheezy, RHEL7) you need to create a valid menu.lst
+
+  
 ## What's not working:
 
 * PyGrub
-
-
-## What's untested:
-
-* PV-Grub   (should just work)
 
 
 ## What's planned:
