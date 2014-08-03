@@ -49,6 +49,10 @@ PV-Grub can only boot "legacy Grub". On distros using Grub2 (Wheezy, RHEL7) you 
 ## What's not working:
 
 * PyGrub
+  The following Xen-devel thread explains the issue: 
+  http://thr3ads.net/xen-devel/2013/01/2281686-pygrub-hvm-boot-with-alternate-script-for-block-devices 
+  LibXL should attach RBD device and pass it over correctly as "write_dev" stores it...
+  (in xenstore we should params = poolname:image and image as passed to pygrub should be /dev/rbd/pool/image)
 
 
 ## What's planned:
