@@ -82,7 +82,7 @@ parse_target()
 add()
 {
     if rbd --pool $pool list | grep $image >/dev/null ; then
-       do_or_die rbd --pool $pool --image $image map
+       do_or_die rbd --pool $pool --image $image map > /dev/null
        
     else
        fatal "Uname to attach RBD pool: $pool image: $image"
@@ -98,7 +98,7 @@ add()
 remove()
 {
     if [ -b /dev/rbd/$pool/$image ]; then
-       do_or_die rbd unmap /dev/rbd/$pool/$image
+       do_or_die rbd unmap /dev/rbd/$pool/$image > /dev/null
     else
         fatal "Uname to detach RBD pool: $pool image: $image wasn't found"
     fi
